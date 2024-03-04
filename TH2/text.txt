@@ -1,0 +1,3 @@
+Hello! Welcome to demofile.txt
+Cipher text: RoXwoY9G7uJmpAxJR/oy/h88CHaqvCkEis7tRgZtcZw=
+Plain text: Hello! Welcome to demofile.txt
