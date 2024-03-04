@@ -1,4 +1,3 @@
-from math import gcd
 from string import ascii_lowercase, ascii_uppercase
 import streamlit as st
 
@@ -10,18 +9,35 @@ import streamlit as st
 low_alphabet = ascii_lowercase
 up_alphabet = ascii_uppercase
 
-# thuật toán Euclid mở rộng
-def gcd_extended(a, b):
-    if a == 0:
-        return b, 0, 1
-    else:
-        g, x, y = gcd_extended(b % a, a)
-        return g, y - (b // a) * x, x
+# # thuật toán Euclid mở rộng
+# def gcd_extended(a, b):
+#     if b == 0:
+#         return a, 1, 0
+#     else:
+#         g, x, y = gcd_extended(b, a % b)
+#         return g, y - (a // b) * x, x
 
-# tính modulo nghịch đảo
-def mod_inverse(a, m):
-    g, x, y = gcd_extended(a, m)
-    return x % m
+# # tính modulo nghịch đảo
+# def mod_inverse(a, m):
+#     g, x, y = gcd_extended(a, m)
+#     return x % m
+
+def mod_inverse(a,b):
+    x1, x2 = 1, 0
+    y1, y2 = 0, 1
+    while b:
+        q = a//b
+        x2, x1 = x1 - q*x2, x2
+        y2, y1 = y1 - q*y2, y2
+        a, b = b, a % b
+    return x1
+
+
+# tính UCLN với thuật toán Euclid
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a%b)    
 
 # kiểm tra 2 số nguyên tố cùng nhau
 def check_coprime(a, b):
@@ -68,9 +84,12 @@ def main():
         text_encoded = encode(text, a, b, m)
         st.write(f"Chuỗi đã được mã hóa: {text_encoded}")
         
-        if st.button("Giải mã", use_container_width=True, type="primary"):
-            text_decoded = decode(text_encoded, a, b, m)
-            st.write(f"Chuỗi đã ban đầu: {text_decoded}")
+        # if st.button("Giải mã", use_container_width=True, type="primary"):
+        #     text_decoded = decode(text_encoded, a, b, m)
+        #     st.write(f"Chuỗi ban đầu: {text_decoded}")
+            
+        text_decoded = decode(text_encoded, a, b, m)
+        st.write(f"Chuỗi ban đầu: {text_decoded}")
         
     else:
         st.warning(f'Hai số {a} và {m} không phải là số nguyên tố cùng nhau', icon="⚠️")
