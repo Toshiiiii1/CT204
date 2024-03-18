@@ -1,3 +1,7 @@
+# Ho va ten sinh vien: Huynh Duy Khoi
+# Ma so sinh vien: B2007190
+# STT: 7
+
 from sympy import primerange
 import random
 from math import lcm, gcd
